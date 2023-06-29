@@ -1,0 +1,14 @@
+.add-balance {
+  margin-top: 20px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  padding: 15px;
+  border-radius: 3px;
+}
+
+.add-balance__select {
+  margin-bottom: 10px;
+}
+
+.add-balance__button {
+  width: 100%;
+}

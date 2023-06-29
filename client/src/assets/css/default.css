@@ -88,3 +88,37 @@ button:active::after {
   margin-top: 10px;
   width: 100%;
 }
+
+.loader {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  height: 60px;
+}
+
+.loader:after {
+  content: ' ';
+  display: block;
+  width: 45px;
+  height: 45px;
+  margin: 8px;
+  border-radius: 50%;
+  border: 5px solid #fff;
+  border-color: #fff transparent #fff transparent;
+  animation: loader-animation 1.2s linear infinite;
+}
+
+@keyframes loader-animation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.react-tabs__tab--selected {
+  background-color: #ddd;
+  outline: 1px solid #989898;
+}

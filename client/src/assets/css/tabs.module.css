@@ -1,0 +1,13 @@
+.tablist {
+  margin: 20px 0;
+  display: flex;
+  justify-content: space-between;
+  cursor: pointer;
+  border-bottom: 1px solid #ddd;
+}
+
+.tab {
+  width: 100%;
+  text-align: center;
+  padding: 10px;
+}

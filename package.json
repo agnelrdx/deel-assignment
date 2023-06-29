@@ -7,8 +7,10 @@
   ],
   "dependencies": {
     "body-parser": "^1.19.0",
+    "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
     "express": "4.17.1",
+    "react-tabs": "^6.0.1",
     "sequelize": "^6.3.4",
     "sqlite3": "^5.1.6"
   },

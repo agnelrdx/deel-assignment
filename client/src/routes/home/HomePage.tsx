@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import Select from 'react-select';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Navigate } from 'react-router-dom';
 import logo from 'assets/images/react.svg';
-import { GET } from 'utils/api';
+import { GET, POST } from 'utils/api';
 import styles from './HomePage.module.css';
 
 type Dropdown = {
@@ -18,10 +18,13 @@ type Client = {
 
 const HomePage = () => {
   const navigate = useNavigate();
+  const data = sessionStorage.getItem('logged-in');
   const [selectedClient, setSelectedClient] = useState<Dropdown | null>(null);
   const [options, setOptions] = useState<Dropdown[]>([]);
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
+
+  if (data) return <Navigate to="/dashboard" />;
 
   const fetchDropdown = async () => {
     setLoading(true);
@@ -38,11 +41,18 @@ const HomePage = () => {
     fetchDropdown();
   }, []);
 
-  const handleClick = () => {
+  const handleClick = async () => {
     setError(false);
     if (!selectedClient) return setError(true);
 
-    navigate(`/dashboard/${selectedClient.value}`);
+    const loginRes = await POST('login', {
+      data: { id: selectedClient.value },
+    });
+
+    if (loginRes.status) {
+      sessionStorage.setItem('logged-in', 'true');
+      navigate(`/dashboard`);
+    }
   };
 
   return (
