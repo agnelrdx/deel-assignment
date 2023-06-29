@@ -1,6 +1,8 @@
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import AddBalance from 'components/AddBalance';
+import PayContractor from 'components/PayContractor';
 import styles from 'assets/css/tabs.module.css';
+import { Profile } from 'utils/types';
 
 interface ProfileTabsProps {
   profileDetails: {
@@ -10,9 +12,10 @@ interface ProfileTabsProps {
     balance: number;
     profession: string;
   };
+  updateProfile: React.Dispatch<React.SetStateAction<Profile | null>>;
 }
 
-const ProfileTabs = ({ profileDetails }: ProfileTabsProps) => {
+const ProfileTabs = ({ profileDetails, updateProfile }: ProfileTabsProps) => {
   return (
     <Tabs>
       <TabList className={styles.tablist}>
@@ -24,10 +27,10 @@ const ProfileTabs = ({ profileDetails }: ProfileTabsProps) => {
         <p className="mb-1">First Name - {profileDetails.firstName}</p>
         <p className="mb-1">Last Name - {profileDetails.lastName}</p>
         <p className="mb-1">Profession - {profileDetails.profession}</p>
-        <AddBalance />
+        <AddBalance updateProfile={updateProfile} />
       </TabPanel>
       <TabPanel>
-        <h2>Any content 2</h2>
+        <PayContractor updateProfile={updateProfile} />
       </TabPanel>
     </Tabs>
   );

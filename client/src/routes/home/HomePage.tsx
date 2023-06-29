@@ -3,6 +3,7 @@ import Select from 'react-select';
 import { useNavigate, Navigate } from 'react-router-dom';
 import logo from 'assets/images/react.svg';
 import { GET, POST } from 'utils/api';
+import { Profile } from 'utils/types';
 import styles from './HomePage.module.css';
 
 type Dropdown = {
@@ -10,26 +11,20 @@ type Dropdown = {
   label: string;
 };
 
-type Client = {
-  id: string;
-  firstName: string;
-  lastName: string;
-};
-
 const HomePage = () => {
   const navigate = useNavigate();
-  const data = sessionStorage.getItem('logged-in');
+  const loggedInUser = sessionStorage.getItem('logged-in-user');
   const [selectedClient, setSelectedClient] = useState<Dropdown | null>(null);
   const [options, setOptions] = useState<Dropdown[]>([]);
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  if (data) return <Navigate to="/dashboard" />;
+  if (loggedInUser) return <Navigate to="/dashboard" />;
 
   const fetchDropdown = async () => {
     setLoading(true);
-    const clients = await GET('clients');
-    const dropdownOptions = clients.map((client: Client) => ({
+    const clients = await GET('profiles?type=client');
+    const dropdownOptions = clients.map((client: Profile) => ({
       value: client.id,
       label: `${client.firstName} ${client.lastName}`,
     }));
@@ -50,7 +45,7 @@ const HomePage = () => {
     });
 
     if (loginRes.status) {
-      sessionStorage.setItem('logged-in', 'true');
+      sessionStorage.setItem('logged-in-user', selectedClient.value);
       navigate(`/dashboard`);
     }
   };

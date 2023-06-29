@@ -6,9 +6,14 @@ const handleRequest = async (url: string, requestInit: RequestInit) => {
   try {
     const response = await fetch(url, requestInit);
 
-    const json = await response.json();
+    if (response.status === 401) {
+      sessionStorage.removeItem('logged-in-user');
+      return window.location.replace('/');
+    }
 
     if (!response.ok) return null;
+
+    const json = await response.json();
 
     return json;
   } catch (error) {

@@ -1,0 +1,17 @@
+.pay-contractor__table {
+  margin-top: 20px;
+  width: 100%;
+}
+
+.pay-contractor__table th,
+.pay-contractor__table td {
+  border: 1px solid #ddd;
+  padding: 5px 10px;
+  font-size: 14px;
+}
+
+.pay-contractor__pay {
+  font-size: 14px;
+  padding: 2px 10px;
+  width: 100%;
+}
