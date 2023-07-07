@@ -49,7 +49,12 @@ const DashboardPage = () => {
             <span className={styles['header__balance']}>
               Balance: ${profile.balance.toFixed(2)}
             </span>
-            <span className={styles['header__logout']} onClick={handleClick}>
+            <span
+              className={styles['header__logout']}
+              id="logout"
+              aria-labelledby="logout"
+              onClick={handleClick}
+            >
               Logout
             </span>
           </div>

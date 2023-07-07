@@ -19,8 +19,6 @@ const HomePage = () => {
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  if (loggedInUser) return <Navigate to="/dashboard" />;
-
   const fetchDropdown = async () => {
     setLoading(true);
     const clients = await GET('profiles?type=client');
@@ -44,11 +42,15 @@ const HomePage = () => {
       data: { id: selectedClient.value },
     });
 
+    console.log('*******loginRes', loginRes);
+
     if (loginRes.status) {
       sessionStorage.setItem('logged-in-user', selectedClient.value);
       navigate(`/dashboard`);
     }
   };
+
+  if (loggedInUser) return <Navigate to="/dashboard" />;
 
   return (
     <div className="flex items-center justify-center h-full">

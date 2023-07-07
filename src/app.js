@@ -42,10 +42,8 @@ app.post('/balances/deposit/:userId', getProfile, async (req, res) => {
   const total = jobs.reduce((acc, v) => acc + v.price, 0);
   const percentagePayable = (25 / 100) * total;
 
-  console.log('****', total);
-
   if (percentagePayable !== 0 && amount > percentagePayable)
-    return res.status(404).end();
+    return res.status(400).end();
 
   const sum = profile.balance + amount;
   await Profile.update({ balance: sum }, { where: { id: userId } });
@@ -72,7 +70,7 @@ app.post('/jobs/:job_id/pay', getProfile, async (req, res) => {
     where: { id: job_id },
   });
   const balance = req.profile.balance;
-  if (balance < job.price) return res.status(404).end();
+  if (balance < job.price) return res.status(400).end();
 
   await Job.update(
     {
