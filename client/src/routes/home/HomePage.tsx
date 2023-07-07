@@ -42,8 +42,6 @@ const HomePage = () => {
       data: { id: selectedClient.value },
     });
 
-    console.log('*******loginRes', loginRes);
-
     if (loginRes.status) {
       sessionStorage.setItem('logged-in-user', selectedClient.value);
       navigate(`/dashboard`);
