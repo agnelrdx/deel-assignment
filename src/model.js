@@ -26,9 +26,18 @@ Profile.init(
     type: {
       type: Sequelize.ENUM('client', 'contractor'),
     },
+    createdAt: {
+      type: Sequelize.STRING,
+      defaultValue: new Date().toISOString(),
+    },
+    updatedAt: {
+      type: Sequelize.STRING,
+      defaultValue: new Date().toISOString(),
+    },
   },
   {
     sequelize,
+    timestamps: false,
     modelName: 'Profile',
   }
 );
@@ -43,9 +52,18 @@ Contract.init(
     status: {
       type: Sequelize.ENUM('new', 'in_progress', 'terminated'),
     },
+    createdAt: {
+      type: Sequelize.STRING,
+      defaultValue: new Date().toISOString(),
+    },
+    updatedAt: {
+      type: Sequelize.STRING,
+      defaultValue: new Date().toISOString(),
+    },
   },
   {
     sequelize,
+    timestamps: false,
     modelName: 'Contract',
   }
 );
@@ -66,11 +84,20 @@ Job.init(
       default: false,
     },
     paymentDate: {
-      type: Sequelize.DATE,
+      type: Sequelize.STRING,
+    },
+    createdAt: {
+      type: Sequelize.STRING,
+      defaultValue: new Date().toISOString(),
+    },
+    updatedAt: {
+      type: Sequelize.STRING,
+      defaultValue: new Date().toISOString(),
     },
   },
   {
     sequelize,
+    timestamps: false,
     modelName: 'Job',
   }
 );

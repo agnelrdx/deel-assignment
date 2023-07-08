@@ -20,8 +20,12 @@
     "start:all": "concurrently \"nodemon ./src/server.js\" \"cd client && npm run start\""
   },
   "devDependencies": {
+    "chai": "^4.3.7",
+    "chai-http": "^4.4.0",
     "concurrently": "4.1.0",
-    "nodemon": "1.19.1"
+    "mocha": "^10.2.0",
+    "nodemon": "1.19.1",
+    "sinon": "^15.2.0"
   },
   "engines": {
     "node": ">=10.16.3"

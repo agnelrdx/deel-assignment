@@ -46,7 +46,10 @@ app.post('/balances/deposit/:userId', getProfile, async (req, res) => {
     return res.status(400).end();
 
   const sum = profile.balance + amount;
-  await Profile.update({ balance: sum }, { where: { id: userId } });
+  await Profile.update(
+    { balance: sum, updatedAt: new Date().toISOString() },
+    { where: { id: userId } }
+  );
   res.json({ status: true });
 });
 
@@ -83,6 +86,7 @@ app.post('/jobs/:job_id/pay', getProfile, async (req, res) => {
   await Profile.update(
     {
       balance: (balance - job.price).toFixed(2),
+      updatedAt: new Date().toISOString(),
     },
     { where: { id: req.profile.id } }
   );
@@ -130,7 +134,7 @@ app.post('/login', async (req, res) => {
   const { id } = req.body;
   const { Profile } = req.app.get('models');
   const profile = await Profile.findOne({ where: { id } });
-  if (!profile) return res.status(404).end();
+  if (!profile) return res.status(401).end();
   res.cookie('profile_id', profile.id, {
     maxAge: 1000 * 60 * 20,
     httpOnly: true,
